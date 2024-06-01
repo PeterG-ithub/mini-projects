@@ -1,0 +1,10 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- Define the base directory for the projects -->
+    <MiniProjectsDir>$(MSBuildThisFileDirectory)</MiniProjectsDir>
+    <!-- Define subdirectories relative to the base directory -->
+    <ExternalDir>$(MiniProjectsDir)external\</ExternalDir>
+    <ProjectsDir>$(MiniProjectsDir)projects\</ProjectsDir>
+    <ScriptsDir>$(MiniProjectsDir)scripts\</ScriptsDir>
+  </PropertyGroup>
+</Project>

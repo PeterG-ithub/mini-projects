@@ -20,3 +20,10 @@ sf::Vector2f Calc::normalize(sf::Vector2f& vector)
         return sf::Vector2f(0.0f, 0.0f);
     }
 }
+
+float Calc::distance(sf::Vector2f& v1, sf::Vector2f& v2)
+{
+    float dx = v2.x - v1.x;
+    float dy = v2.y - v1.y;
+    return std::sqrt(dx * dx + dy * dy);
+}

@@ -39,21 +39,31 @@ void Leg::setPosition(sf::Vector2f pos)
 	sprite.setPosition(position);
 }
 
+void Leg::setEndPosition(sf::Vector2f pos)
+{
+	endPos = pos;
+	angle = angleTo(pos);
+	rotate(angle);
+	updateEndPos();
+}
+
 sf::Vector2f Leg::getEndPos()
 {
 	return endPos;
 }
 
+//Update end position base on angle of leg
 void Leg::updateEndPos()
 {
 	sf::Vector2f origin = sprite.getOrigin();
 	float angleRadians = angle * M_PI / 180.0f;
 	float x = length * cos(angleRadians); // H * cos(ang) = x
 	float y = length * sin(angleRadians); // H * sin(ang) = y
-	std::cout << "x, y: (" << x << ", " << y << ")" << std::endl;
+	//std::cout << "x, y: (" << x << ", " << y << ")" << std::endl;
 	endPos = sf::Vector2f(position.x + x, position.y + y);
-	std::cout << "End Position: (" << endPos.x << ", " << endPos.y << ")" << std::endl;
+	//std::cout << "End Position: (" << endPos.x << ", " << endPos.y << ")" << std::endl;
 }
+
 
 //Find the angle needed to point at position
 float Leg::angleTo(sf::Vector2f pos)

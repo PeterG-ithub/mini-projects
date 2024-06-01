@@ -9,5 +9,6 @@ class Calc
 public:
 	static float angleV(sf::Vector2f& vector);
 	static sf::Vector2f normalize(sf::Vector2f& vector);
+	static float distance(sf::Vector2f& v1, sf::Vector2f& v2);
 };
 

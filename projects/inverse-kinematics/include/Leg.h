@@ -16,6 +16,7 @@ public:
 	void rotate(float angle);
 	void setColor(sf::Color col);
 	void setPosition(sf::Vector2f pos);
+	void setEndPosition(sf::Vector2f pos);
 	void updateEndPos();
 	sf::Vector2f getEndPos();
 	float angleTo(sf::Vector2f pos);

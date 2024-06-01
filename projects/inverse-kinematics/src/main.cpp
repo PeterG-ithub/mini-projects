@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Leg.h"
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1280, 720, 32), "SFML Window", sf::Style::Default);
@@ -9,6 +11,10 @@ int main()
     sf::Clock clock;
     int frameCount = 0;
     float elapsedTime = 0.0f;
+
+    Leg leg(sf::Vector2f(50.0f, 50.0f), 10.0f, 5.0f);
+    Leg leg2;
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -32,6 +38,8 @@ int main()
 
         window.clear(sf::Color::White);
         window.draw(shape);
+        leg.draw(window);
+        leg2.draw(window);
         window.display();
     }
 

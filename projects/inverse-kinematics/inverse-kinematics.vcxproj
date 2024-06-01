@@ -19,10 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Calc.cpp" />
     <ClCompile Include="src\Leg.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Calc.h" />
     <ClInclude Include="include\Leg.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

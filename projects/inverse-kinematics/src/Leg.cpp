@@ -17,3 +17,23 @@ void Leg::draw(sf::RenderWindow& window)
 {
 	window.draw(sprite);
 }
+
+//Rotate leg with pivot pos as pivot
+void Leg::rotate(float angle) {
+	sprite.setRotation(angle);
+}
+
+void Leg::setColor(sf::Color col)
+{
+	sprite.setFillColor(col);
+}
+
+//Find the angle needed to point at position
+float Leg::angleTo(sf::Vector2f pos)
+{
+	sf::Vector2f position = sprite.getPosition();
+	sf::Vector2f diffVector = pos - position; 
+	sf::Vector2f normalizedVector = Calc::normalize(diffVector);
+	float angle = Calc::angleV(normalizedVector);
+	return angle;
+}

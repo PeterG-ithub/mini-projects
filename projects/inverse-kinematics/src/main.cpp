@@ -5,28 +5,50 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1280, 720, 32), "SFML Window", sf::Style::Default);
+    sf::Clock clock;    //Var for dt
 
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-    sf::Clock clock;
-    int frameCount = 0;
+    //Variable for FPS counter
+    int frameCount = 0;    
     float elapsedTime = 0.0f;
 
-    Leg leg(sf::Vector2f(50.0f, 50.0f), 10.0f, 5.0f);
-    Leg leg2;
+    bool isButtonPressed = true;
 
+    Leg leg2;
+    Leg leg1;
+    leg1.setColor(sf::Color::Red);
+    leg1.rotate(21.7f);
     while (window.isOpen())
     {
         sf::Event event;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
+            {
                 window.close();
+            }
+            else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+            {
+                if (!isButtonPressed)
+                {
+                    isButtonPressed = true;
+                    sf::Vector2i localPosition = sf::Mouse::getPosition(window);
+                    float angle = leg2.angleTo(sf::Vector2f(localPosition));
+                    std::cout << angle << std::endl;
+                    leg2.rotate(angle);
+                }
+            }
+            else if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
+            {
+                isButtonPressed = false;
+            }
         }
 
+
+        //deltaTime
         sf::Time deltaTime = clock.restart();
         float dt = deltaTime.asSeconds();
 
+        //FPS counter
         frameCount++;
         elapsedTime += dt;
         if (elapsedTime > 1.0f) {
@@ -36,10 +58,10 @@ int main()
         }
         
 
+
         window.clear(sf::Color::White);
-        window.draw(shape);
-        leg.draw(window);
         leg2.draw(window);
+        leg1.draw(window);
         window.display();
     }
 

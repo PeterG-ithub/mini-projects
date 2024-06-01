@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "Calc.h"
+
 class Leg
 {
 public:
@@ -10,9 +12,13 @@ public:
 	sf::Vector2f position;
 	void update(float& deltaTime);
 	void draw(sf::RenderWindow& window);
+	void rotate(float angle);
+	void setColor(sf::Color col);
+	float angleTo(sf::Vector2f pos);
 private:
 	float length;
 	float thickness;
+	sf::Vector2f pivotPos;
 	sf::Color color;
 	sf::RectangleShape sprite;
 };

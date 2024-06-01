@@ -18,6 +18,7 @@ public:
 	void setPosition(sf::Vector2f pos);
 	void setEndPosition(sf::Vector2f pos);
 	void updateEndPos();
+	float getLength();
 	sf::Vector2f getEndPos();
 	float angleTo(sf::Vector2f pos);
 private:

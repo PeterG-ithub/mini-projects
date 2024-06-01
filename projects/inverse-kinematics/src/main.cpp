@@ -36,25 +36,50 @@ int main()
                 {
                     isButtonPressed = true;
                     sf::Vector2i localPosition = sf::Mouse::getPosition(window);
-                    sf::Vector2f mousePositionF(static_cast<float>(localPosition.x), static_cast<float>(localPosition.y));
-                    std::cout << "Mouse Position: (" << localPosition.x << ", " << localPosition.y << ")" << std::endl;
-
+                    sf::Vector2f targetPosition(static_cast<float>(localPosition.x), static_cast<float>(localPosition.y));
+                    sf::Vector2f basePosition(leg1.position);
+                    //std::cout << "target Position: (" << targetPosition.x << ", " << targetPosition.y << ")" << std::endl;
+                    //std::cout << "Base Position: (" << basePosition.x << ", " << basePosition.y << ")" << std::endl;
                     //Inverse Kinematics trigger
-                    float distance = Calc::distance(leg1.position, mousePositionF);
+                    float distance = Calc::distance(basePosition, targetPosition);
                     if (distance < 2.0f * len)
                     {
+                        float l1 = leg1.getLength();
+                        float l2 = leg2.getLength();
+                        float x = targetPosition.x - basePosition.x;
+                        float y = -(targetPosition.y - basePosition.y);
+                        std::cout << "(x: " << x << ", y: " << y << ")" << std::endl;
 
-                        float angle = acos(distance / (2.0f * len));
-                        std::cout << "Angle: " << angle << std::endl;
+                        //ARC TAN from WHERE? idk, but this fixes things
+                        float eTan = 0.0f;
+                        if (x < 0) 
+                            eTan = M_PI + atan(y / x);
+                        else
+                            eTan = atan(y / x);
+                        std::cout << "Tan: " << eTan << std::endl;
 
-                        // Calculating the local end position
-                        float x = len * cos(angle); // H * cos(ang) = x
-                        float y = len * sin(angle); // H * sin(ang) = y
-                        sf::Vector2f calculatedEndPos(leg1.position.x + x, leg1.position.y + y);
-                        std::cout << "calculated Position: (" << calculatedEndPos.x << ", " << calculatedEndPos.y << ")" << std::endl;
-                        leg2.setPosition(calculatedEndPos);
-                        leg2.setEndPosition(mousePositionF);
-                        leg1.setEndPosition(calculatedEndPos);
+                        //EQ 1
+                        float test = ((l1 * l1) + (x * x) + (y * y) - (l2 * l2)) / (2.0f * l1 * std::sqrt(x * x + y * y));
+                        float angle1 = acos(test) + eTan;
+                        float angle1D = angle1 * 180.0f / M_PI;
+                        if (angle1D > 180.0f)
+                            angle1D = angle1D - 360.0f;
+                        std::cout << "Angle 1: " << angle1D << std::endl;
+                        //EQ 2
+                        float angle2 = acos((l1 * l1 + l2 * l2 - (x*x + y*y)) / (2.0f * l1 * l2));
+                        float angle2D = angle2 * 180.0f / M_PI;
+
+                        std::cout << "Angle 2: " << angle2D << std::endl;
+                        leg1.rotate(angle1D);
+                        leg2.setPosition(leg1.getEndPos());
+
+                        //secret stuff
+                        float theAngle = 180.0f - (angle1D + angle2D);
+                        if (theAngle > 180.0f)
+                            theAngle = theAngle - 360.0f;
+
+                        std::cout << "The Angle: " << theAngle << std::endl;
+                        leg2.rotate(-theAngle); // F = 180 - angle1 + angle2
                     }
                     std::cout << "Distance: " << distance << std::endl;
                 }

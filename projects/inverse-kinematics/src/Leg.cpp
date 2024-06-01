@@ -23,8 +23,8 @@ void Leg::draw(sf::RenderWindow& window)
 
 //Rotate leg with pivot pos as pivot
 void Leg::rotate(float ang) {
-	angle = ang;
-	sprite.setRotation(ang);
+	angle = -ang;
+	sprite.setRotation(angle);
 	updateEndPos();
 }
 
@@ -44,7 +44,7 @@ void Leg::setEndPosition(sf::Vector2f pos)
 	endPos = pos;
 	angle = angleTo(pos);
 	rotate(angle);
-	updateEndPos();
+	//updateEndPos();
 }
 
 sf::Vector2f Leg::getEndPos()
@@ -62,6 +62,11 @@ void Leg::updateEndPos()
 	//std::cout << "x, y: (" << x << ", " << y << ")" << std::endl;
 	endPos = sf::Vector2f(position.x + x, position.y + y);
 	//std::cout << "End Position: (" << endPos.x << ", " << endPos.y << ")" << std::endl;
+}
+
+float Leg::getLength()
+{
+	return length;
 }
 
 

@@ -11,12 +11,12 @@ int main()
     int frameCount = 0;    
     float elapsedTime = 0.0f;
 
-    bool isButtonPressed = true;
+    bool isButtonPressed = false;
 
     Leg leg2;
     Leg leg1;
     leg1.setColor(sf::Color::Red);
-    leg1.rotate(21.7f);
+    leg1.rotate(90.0f);
     while (window.isOpen())
     {
         sf::Event event;
@@ -32,8 +32,9 @@ int main()
                 {
                     isButtonPressed = true;
                     sf::Vector2i localPosition = sf::Mouse::getPosition(window);
+                    std::cout << "Mouse Position: (" << localPosition.x << ", " << localPosition.y << ")" << std::endl;
                     float angle = leg2.angleTo(sf::Vector2f(localPosition));
-                    std::cout << angle << std::endl;
+                    //std::cout << angle << std::endl;
                     leg2.rotate(angle);
                 }
             }
@@ -42,7 +43,8 @@ int main()
                 isButtonPressed = false;
             }
         }
-
+        //update
+        leg1.setPosition(leg2.getEndPos());
 
         //deltaTime
         sf::Time deltaTime = clock.restart();
@@ -52,11 +54,14 @@ int main()
         frameCount++;
         elapsedTime += dt;
         if (elapsedTime > 1.0f) {
-            std::cout << "FPS: " << frameCount/elapsedTime << std::endl;
+            //std::cout << "FPS: " << frameCount/elapsedTime << std::endl;
             frameCount = 0;
             elapsedTime = 0.0f;
         }
         
+        //update
+        leg1.update(dt);
+        leg2.update(dt);
 
 
         window.clear(sf::Color::White);

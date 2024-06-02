@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Leg.h"
+#include "Body.h"
 #include "Calc.h"
 
 int main()
@@ -16,6 +17,7 @@ int main()
 
     Leg leg1;
     Leg leg2;
+    Body bod;
 
     leg2.setColor(sf::Color::Red);
     leg2.rotate(90.0f);
@@ -73,7 +75,7 @@ int main()
                         leg1.rotate(angle1D);
                         leg2.setPosition(leg1.getEndPos());
 
-                        //secret stuff
+                        //calculating the angle relative to the X axis of leg2
                         float theAngle = 180.0f - (angle1D + angle2D);
                         if (theAngle > 180.0f)
                             theAngle = theAngle - 360.0f;
@@ -113,6 +115,7 @@ int main()
         window.clear(sf::Color::White);
         leg1.draw(window);
         leg2.draw(window);
+        bod.draw(window);
         window.display();
     }
 

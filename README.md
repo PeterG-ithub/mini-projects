@@ -19,4 +19,4 @@ This repository contains several mini-projects implemented in C++ using various 
    ```sh
    git clone git@github.com:PeterG-ithub/mini-projects.git
    cd mini-projects
-   scripts/setup_dependencies.bat
+   scripts\setup_dependencies.bat

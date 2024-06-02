@@ -4,7 +4,7 @@
 class Body
 {
 public:
-	Body(sf::Vector2f pos = sf::Vector2f(200.0f, 300.0f), float len = 250.0f, float wid = 200.0f, sf::Color col = sf::Color::Blue);
+	Body(sf::Vector2f pos = sf::Vector2f(200.0f, 280.0f), float len = 250.0f, float wid = 200.0f, sf::Color col = sf::Color::Blue);
 	void update(float& deltaTime);
 	void draw(sf::RenderWindow& window);
 	void move(float velocity, float& deltaTime);

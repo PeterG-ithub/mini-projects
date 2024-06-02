@@ -73,6 +73,7 @@ int main()
     leg1.setPosition(bod.getLegBasePosition());
     leg2.setPosition(leg1.getEndPos());
     float len = 100.0f;
+    sf::Vector2f targetPosition(300.0f, 650.0f);
     while (window.isOpen())
     {
         //deltaTime
@@ -102,8 +103,6 @@ int main()
                     isButtonPressed = true;
                     sf::Vector2i localPosition = sf::Mouse::getPosition(window);
                     sf::Vector2f targetPosition(static_cast<float>(localPosition.x), static_cast<float>(localPosition.y));
-                    updateLegs(leg1, leg2, targetPosition);
-
                     
                 }
             }
@@ -124,11 +123,17 @@ int main()
         }
 
         //update
+
         leg1.update(dt);
         leg2.update(dt);
         leg1.setPosition(bod.getLegBasePosition());
         leg2.setPosition(leg1.getEndPos());
 
+        updateLegs(leg1, leg2, targetPosition);
+        if (abs(bod.getLegBasePosition().x - targetPosition.x) > 30) {
+            targetPosition.x = bod.getLegBasePosition().x + 20.0f;
+        }
+        
         window.clear(sf::Color::White);
         bod.draw(window);
         env.draw(window);

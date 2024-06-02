@@ -22,8 +22,9 @@ void Body::draw(sf::RenderWindow& window)
 void Body::move(float velocity, float& deltaTime)
 {
 	position.x += velocity * deltaTime;
+	legBasePos.x += velocity * deltaTime;
+	legBaseSprite.setPosition(legBasePos);
 	sprite.setPosition(position);
-	std::cout << position.x << std::endl;
 }
 
 //Set leg base position relative to the position of body

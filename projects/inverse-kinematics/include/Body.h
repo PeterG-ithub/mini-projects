@@ -8,9 +8,12 @@ public:
 	void update(float& deltaTime);
 	void draw(sf::RenderWindow& window);
 	void move(float velocity, float& deltaTime);
-	sf::Vector2f legBase;
+	void setLegBasePosition(sf::Vector2f pos);
+	sf::Vector2f getLegBasePosition();
 private:
 	sf::RectangleShape sprite;
+	sf::CircleShape legBaseSprite;
 	sf::Vector2f position;
+	sf::Vector2f legBasePos;
 };
 

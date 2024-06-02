@@ -19,10 +19,10 @@ int main()
     Leg leg2;
     Body bod;
     Environment env;
-
     env.generateFlatGround(sf::Vector2f(0.0f, 650.0f), sf::Vector2f(1300.0f, 80.0f), sf::Color::Green);
+    bod.setLegBasePosition(sf::Vector2f(100.0f, 180.0f));
+    leg1.setPosition(bod.getLegBasePosition());
     leg2.setColor(sf::Color::Red);
-    leg2.rotate(90.0f);
     leg2.setPosition(leg1.getEndPos());
     float len = 100.0f;
     while (window.isOpen())
@@ -67,7 +67,7 @@ int main()
                         float y = -(targetPosition.y - basePosition.y);
                         std::cout << "(x: " << x << ", y: " << y << ")" << std::endl;
 
-                        //ARC TAN from WHERE? idk, but this fixes things
+                        //ARC TAN from WHERE? idk, but this fixes things // maybe we can use atan2 //check for later
                         float eTan = 0.0f;
                         if (x < 0) 
                             eTan = M_PI + atan(y / x);
@@ -126,10 +126,10 @@ int main()
 
 
         window.clear(sf::Color::White);
-        leg1.draw(window);
-        leg2.draw(window);
         bod.draw(window);
         env.draw(window);
+        leg1.draw(window);
+        leg2.draw(window);
         window.display();
     }
 

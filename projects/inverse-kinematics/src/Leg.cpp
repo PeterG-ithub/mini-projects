@@ -37,6 +37,7 @@ void Leg::setPosition(sf::Vector2f pos)
 {
 	position = pos;
 	sprite.setPosition(position);
+	updateEndPos();
 }
 
 void Leg::setEndPosition(sf::Vector2f pos)

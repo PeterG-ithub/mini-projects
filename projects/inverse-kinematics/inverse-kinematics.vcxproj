@@ -19,12 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Environment.cpp" />
     <ClCompile Include="src\Body.cpp" />
     <ClCompile Include="src\Calc.cpp" />
     <ClCompile Include="src\Leg.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Environment.h" />
     <ClInclude Include="include\Body.h" />
     <ClInclude Include="include\Calc.h" />
     <ClInclude Include="include\Leg.h" />

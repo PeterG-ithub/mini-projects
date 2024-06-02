@@ -3,7 +3,7 @@
 #include "Leg.h"
 #include "Body.h"
 #include "Calc.h"
-
+#include "Environment.h"
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1280, 720, 32), "SFML Window", sf::Style::Default);
@@ -18,7 +18,9 @@ int main()
     Leg leg1;
     Leg leg2;
     Body bod;
+    Environment env;
 
+    env.generateFlatGround(sf::Vector2f(0.0f, 650.0f), sf::Vector2f(1300.0f, 80.0f), sf::Color::Green);
     leg2.setColor(sf::Color::Red);
     leg2.rotate(90.0f);
     leg2.setPosition(leg1.getEndPos());
@@ -116,6 +118,7 @@ int main()
         leg1.draw(window);
         leg2.draw(window);
         bod.draw(window);
+        env.draw(window);
         window.display();
     }
 

@@ -27,6 +27,19 @@ int main()
     float len = 100.0f;
     while (window.isOpen())
     {
+        //deltaTime
+        sf::Time deltaTime = clock.restart();
+        float dt = deltaTime.asSeconds();
+
+        //FPS counter
+        frameCount++;
+        elapsedTime += dt;
+        if (elapsedTime > 1.0f) {
+            //std::cout << "FPS: " << frameCount/elapsedTime << std::endl;
+            frameCount = 0;
+            elapsedTime = 0.0f;
+        }
+
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -92,23 +105,21 @@ int main()
             {
                 isButtonPressed = false;
             }
+            
         }
-        //update
-        
 
-        //deltaTime
-        sf::Time deltaTime = clock.restart();
-        float dt = deltaTime.asSeconds();
-
-        //FPS counter
-        frameCount++;
-        elapsedTime += dt;
-        if (elapsedTime > 1.0f) {
-            //std::cout << "FPS: " << frameCount/elapsedTime << std::endl;
-            frameCount = 0;
-            elapsedTime = 0.0f;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
+            // left key is pressed: move our character
+            std::cout << "position.x" << std::endl;
+            bod.move(100.0f, dt);
         }
-        
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            // left key is pressed: move our character
+            std::cout << "position.x" << std::endl;
+            bod.move(-100.0f, dt);
+        }
         //update
         leg1.update(dt);
         leg2.update(dt);
